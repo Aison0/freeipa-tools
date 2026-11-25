@@ -16,7 +16,7 @@ How it works:
   - Logs any applied membership changes to syslog (LOG_INFO).
 
 Usage:
-  - PAM (pam_exec): session optional pam_exec.so /usr/share/scripts/ipa/sync-local-groups.py
+  - PAM (pam_exec): session optional pam_exec.so /usr/local/bin/sync-local-groups.py
   - CLI / Dry-Run : sync-local-groups.py -n -u <username>
 """
 
@@ -129,7 +129,7 @@ def main() -> int:
 
     with open(args.config, encoding="utf-8") as f:
         for raw_line in f:
-            line = raw_line.split("#", 1).strip()
+            line = raw_line.split("#", 1)[0].strip()
             if not line:
                 continue
 

@@ -22,7 +22,7 @@ Helper scripts and PAM/profile configurations for integrating Linux clients (**U
 ```text
 .
 ├── bin/
-│   ├── create-ipa-homedir.sh       # Provisions per-user ZFS datasets on the NFS server
+│   ├── create-ipa-homedir.py       # Provisions per-user ZFS datasets on the NFS server
 │   └── sync-local-groups.py        # Synchronizes local /etc/group memberships via PAM or CLI
 ├── config/
 │   └── ipa-local-groups.conf       # Rule definitions for sync-local-groups.py
