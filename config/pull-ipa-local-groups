@@ -1,0 +1,4 @@
+CONFIG_URL="https://config.example.internal/ipa-local-groups.conf"
+# AUTH_HEADER="Bearer your-secret-token"
+# CA_BUNDLE="/etc/ipa/ca.crt"
+# PULL_TIMEOUT="20"

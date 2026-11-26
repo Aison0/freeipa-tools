@@ -1,0 +1,10 @@
+[Unit]
+Description=Pull central ipa-local-groups.conf configuration
+Documentation=https://github.com/Aison0/freeipa-tools/blob/main/pull-ipa-local-groups.README.md
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+EnvironmentFile=-/etc/default/pull-ipa-local-groups
+ExecStart=/usr/local/bin/pull-ipa-local-groups.py
