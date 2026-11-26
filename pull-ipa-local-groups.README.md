@@ -7,15 +7,16 @@ Lightweight pull mechanism to centrally distribute and validate `/etc/security/i
 ```text
 .
 ├── bin/
-│   └── pull-ipa-local-groups.py          # Python fetcher, validator & atomic writer
+│   └── pull-ipa-local-groups.py            # Python fetcher, validator & atomic writer
 ├── system.d/
-│   ├── pull-ipa-local-groups.service     # systemd oneshot service
-│   └── pull-ipa-local-groups.timer       # systemd periodic timer
+│   ├── pull-ipa-local-groups.service       # systemd oneshot service
+│   └── pull-ipa-local-groups.timer         # systemd periodic timer
 ├── config/
-│   └── pull-ipa-local-groups             # configuration file for /etc/default
+│   └── pull-ipa-local-groups               # configuration file for /etc/default
 ├── setup/
-│   └── install-pull-ipa-local-groups.sh  # Installation script
-└── pull-ipa-local-groups.README.md       # Documentation
+│   └── install-pull-ipa-local-groups.sh    # Installation script
+│   └── uninstall-pull-ipa-local-groups.sh  # Uninstallation script
+└── pull-ipa-local-groups.README.md         # Documentation
 ```
 
 ## How It Works
@@ -84,3 +85,25 @@ usage: pull-ipa-local-groups.py [-h] [-u URL] [-o OUTPUT] [-H AUTH_HEADER]
    ```sh
    sudo /usr/local/bin/sync-local-groups.py -n -u <username>
    ```
+
+## Uninstallation
+
+To remove `pull-ipa-local-groups` and its systemd units, run:
+
+```sh
+chmod +x setup/uninstall-pull-ipa-local-groups.sh
+sudo ./setup/uninstall-pull-ipa-local-groups.sh
+```
+
+By default, the uninstaller:
+
+* Stops and disables pull-ipa-local-groups.timer and pull-ipa-local-groups.service.
+* Removes /etc/systemd/system/pull-ipa-local-groups.timer, /etc/systemd/system/pull-ipa-local-groups.service, and /usr/local/bin/pull-ipa-local-groups.py.
+* Reloads systemd and resets failed unit states.
+* Preserves /etc/default/pull-ipa-local-groups (so your CONFIG_URL and credentials are not lost) as well as /etc/security/ipa-local-groups.conf.
+
+To also remove /etc/default/pull-ipa-local-groups, pass --purge-config:
+
+```sh
+sudo ./setup/uninstall-pull-ipa-local-groups.sh --purge-config
+```
